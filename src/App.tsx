@@ -268,14 +268,14 @@ export default function App() {
                     <span className="text-[9px] font-mono flex-shrink-0 ml-2" style={{ color: C.textFaint }}>{proj.year}</span>
                   </div>
                   <h3 className="text-sm font-bold mb-3 leading-snug" style={{ color: C.darkBg }}>{proj.title}</h3>
-                  {/* Description with fade + read-more */}
+                  {/* Description with fade + read-more / collapse */}
                   <div className="mb-5 flex-1">
                     <div
                       className="text-xs leading-relaxed font-light overflow-hidden"
                       style={{
                         color: C.textMed,
                         maxHeight: expandedProjects.has(proj.id) ? '600px' : '3.25em',
-                        transition: 'max-height 0.4s ease',
+                        transition: 'max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                         WebkitMaskImage: expandedProjects.has(proj.id)
                           ? 'none'
                           : 'linear-gradient(to bottom, black 35%, transparent 100%)',
@@ -286,16 +286,16 @@ export default function App() {
                     >
                       {proj.description}
                     </div>
-                    {!expandedProjects.has(proj.id) && (
-                      <button
-                        onClick={() => toggleProject(proj.id)}
-                        className="flex items-center gap-1 mt-1 cursor-pointer select-none"
-                        style={{ color: C.textMed }}
-                      >
-                        <span className="text-sm leading-none">›</span>
-                        <span className="text-[11px] font-display tracking-wide">阅读更多</span>
-                      </button>
-                    )}
+                    <button
+                      onClick={() => toggleProject(proj.id)}
+                      className="flex items-center gap-1 mt-1.5 cursor-pointer select-none transition-opacity duration-300"
+                      style={{ color: C.textMed }}
+                    >
+                      <span className="text-sm leading-none" style={{ display: 'inline-block', transition: 'transform 0.3s ease', transform: expandedProjects.has(proj.id) ? 'rotate(-90deg)' : 'rotate(0deg)' }}>›</span>
+                      <span className="text-[11px] font-display tracking-wide">
+                        {expandedProjects.has(proj.id) ? '收起全文' : '阅读更多'}
+                      </span>
+                    </button>
                   </div>
                   <div className="flex flex-wrap gap-1.5 mb-5">
                     {proj.techStack.map((tech) => (
