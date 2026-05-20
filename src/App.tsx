@@ -15,9 +15,24 @@ const C = {
   textFaint:'#A09590',   // labels / meta (light sections)
 };
 
+const LANG_KEY = 'pref_lang';
+const LANG_TS_KEY = 'pref_lang_ts';
+const ONE_HOUR = 60 * 60 * 1000;
+
+function getSavedLang(): { lang: Language; showModal: boolean } {
+  try {
+    const saved = localStorage.getItem(LANG_KEY) as Language | null;
+    const ts = localStorage.getItem(LANG_TS_KEY);
+    if (saved && ts && Date.now() - parseInt(ts) < ONE_HOUR) {
+      return { lang: saved, showModal: false };
+    }
+  } catch {}
+  return { lang: 'ZH', showModal: true };
+}
+
 export default function App() {
-  const [lang, setLang] = useState<Language>('ZH');
-  const [showLangModal, setShowLangModal] = useState(true);
+  const [lang, setLang] = useState<Language>(() => getSavedLang().lang);
+  const [showLangModal, setShowLangModal] = useState(() => getSavedLang().showModal);
   const [highlightModal, setHighlightModal] = useState<{ title: string; highlights: string[] } | null>(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [showExplore, setShowExplore] = useState(false);
@@ -37,6 +52,8 @@ export default function App() {
   const handleLangSelect = (language: Language) => {
     setLang(language);
     setShowLangModal(false);
+    localStorage.setItem(LANG_KEY, language);
+    localStorage.setItem(LANG_TS_KEY, Date.now().toString());
   };
 
   const copyEmailToClipboard = () => {
@@ -196,7 +213,11 @@ export default function App() {
               {(['ZH', 'EN', 'DE'] as Language[]).map((language) => (
                 <button
                   key={language}
-                  onClick={() => setLang(language)}
+                  onClick={() => {
+                    setLang(language);
+                    localStorage.setItem(LANG_KEY, language);
+                    localStorage.setItem(LANG_TS_KEY, Date.now().toString());
+                  }}
                   className="text-[9px] font-mono font-bold tracking-wider px-2 py-0.5 transition-all cursor-pointer rounded-sm"
                   style={lang === language
                     ? { backgroundColor: '#FFFFFF', color: C.darkBg }
