@@ -220,7 +220,7 @@ export default function App() {
         <div
           className="md:hidden overflow-hidden transition-all duration-300"
           style={{
-            maxHeight: showMobileMenu ? '320px' : '0px',
+            maxHeight: showMobileMenu ? '600px' : '0px',
             borderTop: showMobileMenu ? '1px solid rgba(255,255,255,0.06)' : 'none',
           }}
         >
