@@ -1,0 +1,6 @@
+{
+  "name": "Minimalist Engineering Portfolio",
+  "description": "A premium, high-contrast, minimalist portfolio website inspired by Dan Koe, customized for engineering and technical project management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
