@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Globe, Copy, Check, ArrowUpRight, ChevronDown } from 'lucide-react';
+import { Globe, Copy, Check, ArrowUpRight, ChevronDown, Menu, X } from 'lucide-react';
 
 import { Language } from './types';
 import { TRANSLATIONS } from './translations';
@@ -22,6 +22,7 @@ export default function App() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [showExplore, setShowExplore] = useState(false);
   const [showFooterExplore, setShowFooterExplore] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
   const descRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -156,13 +157,14 @@ export default function App() {
       </AnimatePresence>
 
       {/* ── Header ──────────────────────────────────────────── */}
-      <header className="fixed top-0 left-0 right-0 z-40 py-4" style={{ backgroundColor: '#0a0a0a', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="max-w-[1100px] mx-auto px-6 sm:px-10 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 z-40" style={{ backgroundColor: '#0a0a0a', borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-10 flex items-center justify-between py-4">
           <a href="#home" className="group flex items-center gap-1.5 select-none">
             <span className="font-serif italic text-xl font-extrabold text-white tracking-tight">l.</span>
             <span className="font-sans font-black text-xs uppercase tracking-[-0.03em] bg-white px-2 py-0.5 rounded-[3px] transition-transform group-hover:scale-105 duration-200" style={{ color: C.darkBg }}>zx</span>
           </a>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-4">
+            {/* Desktop nav */}
             <nav className="hidden md:flex items-center gap-6 text-[11px] font-medium tracking-widest uppercase" style={{ color: C.textFaint }}>
               <a href="#home" className="hover:text-white transition-colors">{t.nav.home}</a>
               <a href="#work" className="hover:text-white transition-colors">{t.nav.work}</a>
@@ -186,6 +188,8 @@ export default function App() {
               </div>
             </nav>
             <span className="hidden md:inline text-xs" style={{ color: 'rgba(255,255,255,0.15)' }}>|</span>
+
+            {/* Language switcher */}
             <div className="flex items-center gap-1 px-2 py-1 rounded-sm" style={{ border: '1px solid rgba(255,255,255,0.1)', backgroundColor: 'rgba(255,255,255,0.04)' }}>
               <Globe className="w-3.5 h-3.5 mr-1" style={{ color: C.textFaint }} />
               {(['ZH', 'EN', 'DE'] as Language[]).map((language) => (
@@ -199,7 +203,40 @@ export default function App() {
                 >{language}</button>
               ))}
             </div>
+
+            {/* Mobile hamburger */}
+            <button
+              className="md:hidden cursor-pointer p-1"
+              style={{ color: C.textFaint }}
+              onClick={() => setShowMobileMenu(v => !v)}
+            >
+              {showMobileMenu ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
           </div>
+        </div>
+
+        {/* Mobile nav dropdown */}
+        <div
+          className="md:hidden overflow-hidden transition-all duration-300"
+          style={{
+            maxHeight: showMobileMenu ? '320px' : '0px',
+            borderTop: showMobileMenu ? '1px solid rgba(255,255,255,0.06)' : 'none',
+          }}
+        >
+          <nav className="flex flex-col px-6 py-4 gap-1 text-[12px] font-medium tracking-widest uppercase" style={{ color: C.textFaint }}>
+            <a href="#home" onClick={() => setShowMobileMenu(false)} className="py-2.5 hover:text-white transition-colors" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>{t.nav.home}</a>
+            <a href="#work" onClick={() => setShowMobileMenu(false)} className="py-2.5 hover:text-white transition-colors" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>{t.nav.work}</a>
+            <a href="#why-me" onClick={() => setShowMobileMenu(false)} className="py-2.5 hover:text-white transition-colors" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>{t.nav.whyMe}</a>
+            <a href="#contact" onClick={() => setShowMobileMenu(false)} className="py-2.5 hover:text-white transition-colors" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>{t.nav.contact}</a>
+            <div className="py-2.5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <span className="block mb-2">{exploreLabel}</span>
+              <div className="flex flex-col gap-1 pl-3">
+                {exploreItems.map((item) => (
+                  <a key={item} href="#" onClick={() => setShowMobileMenu(false)} className="py-1 text-[11px] hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.3)' }}>{item}</a>
+                ))}
+              </div>
+            </div>
+          </nav>
         </div>
       </header>
 
