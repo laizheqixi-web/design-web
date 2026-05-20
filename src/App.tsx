@@ -376,7 +376,7 @@ export default function App() {
                     >
                       <span className="text-sm leading-none" style={{ display: 'inline-block', transition: 'transform 0.3s ease', transform: expandedProjects.has(proj.id) ? 'rotate(-90deg)' : 'rotate(0deg)' }}>›</span>
                       <span className="text-[11px] font-display tracking-wide">
-                        {expandedProjects.has(proj.id) ? '收起全文' : '阅读全文'}
+                        {expandedProjects.has(proj.id) ? t.work.collapse : t.work.readMore}
                       </span>
                     </button>
                   </div>
@@ -523,7 +523,8 @@ export default function App() {
             <span className="text-xs font-mono font-bold text-white uppercase tracking-widest">L. ZHEXIAN</span>
             <p className="text-[10px] font-mono" style={{ color: 'rgba(255,255,255,0.2)' }}>&copy; {new Date().getFullYear()} Koblenz, Germany.</p>
           </div>
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.65)' }}>
+          {/* Desktop footer nav */}
+          <div className="hidden md:flex flex-wrap gap-x-5 gap-y-2 text-sm font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.65)' }}>
             <a href="#home" className="hover:text-white transition-all">{t.nav.home}</a>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>/</span>
             <a href="#work" className="hover:text-white transition-all">{t.nav.work}</a>
@@ -548,6 +549,16 @@ export default function App() {
                 </div>
               )}
             </div>
+          </div>
+          {/* Mobile footer nav */}
+          <div className="md:hidden grid grid-cols-2 gap-x-8 gap-y-3 text-[11px] font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.65)' }}>
+            <a href="#home" className="hover:text-white transition-all">{t.nav.home}</a>
+            <a href="#work" className="hover:text-white transition-all">{t.nav.work}</a>
+            <a href="#why-me" className="hover:text-white transition-all">{t.nav.whyMe}</a>
+            <a href="#contact" className="hover:text-white transition-all">{t.nav.contact}</a>
+            {exploreItems.map((item) => (
+              <a key={item} href="#" className="hover:text-white transition-all">{item}</a>
+            ))}
           </div>
         </div>
       </footer>

@@ -17,6 +17,8 @@ export const TRANSLATIONS: Record<
       sectionTitle: string;
       sectionSubtitle: string;
       highlightsBtn: string;
+      readMore: string;
+      collapse: string;
       interactionTitle: string;
       interactionDesc: string;
       simTerminalHeader: string;
@@ -72,6 +74,8 @@ export const TRANSLATIONS: Record<
       sectionTitle: 'Core Experience',
       sectionSubtitle: 'A structured record of engineering leadership, international validation, and cross-border delivery.',
       highlightsBtn: '+ View Highlights',
+      readMore: 'Read More',
+      collapse: 'Collapse',
       interactionTitle: 'Diagnostic Protocol Playground',
       interactionDesc: 'Test an ECU UDS (ISO 14229) service simulation. Run real-world diagnostic requests to read identifiers or trigger seed/key security access.',
       simTerminalHeader: 'Automotive ECU Terminal',
@@ -185,6 +189,8 @@ export const TRANSLATIONS: Record<
       sectionTitle: '核心经历',
       sectionSubtitle: '一份关于工程领导力、全球化道路验证以及底层诊断协议深度的严谨记录。',
       highlightsBtn: '+ 了解详细亮点',
+      readMore: '阅读更多',
+      collapse: '收起全文',
       interactionTitle: '车载诊断协议 (UDS) 动态沙盒',
       interactionDesc: '在此模拟测试车载诊断 ECU UDS (ISO 14229) 服务。发送真实报文指令以读取标识符（如 VIN 码）或模拟安全密钥算法。',
       simTerminalHeader: '车载 ECU 交互终端',
@@ -298,6 +304,8 @@ export const TRANSLATIONS: Record<
       sectionTitle: 'Kernkompetenz & Projekte',
       sectionSubtitle: 'Ein fundierter Nachweis von technischer Führung, internationaler Absicherung und grenzüberschreitender Lieferung.',
       highlightsBtn: '+ Details ansehen',
+      readMore: 'Mehr lesen',
+      collapse: 'Weniger',
       interactionTitle: 'Diagnoseprotokoll-Spielplatz',
       interactionDesc: 'Testen Sie eine ECU UDS (ISO 14229) Diagnosesimulation. Führen Sie reale Diagnoseanfragen aus, um Identifikatoren auszulesen oder den Seed/Key-Zugriff zu simulieren.',
       simTerminalHeader: 'Automotive ECU Terminal',
