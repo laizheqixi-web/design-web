@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Globe, Copy, Check, ArrowUpRight, ChevronDown } from 'lucide-react';
 
@@ -24,6 +24,7 @@ export default function App() {
   const [showFooterExplore, setShowFooterExplore] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
+  const descRefs = useRef<Record<string, HTMLDivElement | null>>({});
   const toggleProject = (id: string) =>
     setExpandedProjects(prev => {
       const next = new Set(prev);
@@ -271,10 +272,13 @@ export default function App() {
                   {/* Description with fade + read-more / collapse */}
                   <div className="mb-5 flex-1">
                     <div
+                      ref={(el) => { descRefs.current[proj.id] = el; }}
                       className="text-xs leading-relaxed font-light overflow-hidden"
                       style={{
                         color: C.textMed,
-                        maxHeight: expandedProjects.has(proj.id) ? '600px' : '3.25em',
+                        maxHeight: expandedProjects.has(proj.id)
+                          ? `${descRefs.current[proj.id]?.scrollHeight ?? 500}px`
+                          : '3.25em',
                         transition: 'max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
                         WebkitMaskImage: expandedProjects.has(proj.id)
                           ? 'none'
@@ -293,7 +297,7 @@ export default function App() {
                     >
                       <span className="text-sm leading-none" style={{ display: 'inline-block', transition: 'transform 0.3s ease', transform: expandedProjects.has(proj.id) ? 'rotate(-90deg)' : 'rotate(0deg)' }}>›</span>
                       <span className="text-[11px] font-display tracking-wide">
-                        {expandedProjects.has(proj.id) ? '收起全文' : '阅读更多'}
+                        {expandedProjects.has(proj.id) ? '收起全文' : '阅读全文'}
                       </span>
                     </button>
                   </div>
