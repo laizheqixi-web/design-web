@@ -198,9 +198,9 @@ export default function App() {
             </div>
 
             {/* Content */}
-            <div className="flex flex-col md:flex-row items-stretch gap-10 md:gap-14">
-              <div className="flex-shrink-0 w-40 md:w-48 lg:w-56 rounded-xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
-                <img src="/b8afd71a6e77ea46e2e2816f9a3447d2.jpg" alt="Profile" className="w-full h-full object-cover object-center" />
+            <div className="flex flex-col md:flex-row items-center gap-10 md:gap-14">
+              <div className="flex-shrink-0 w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
+                <img src="/b8afd71a6e77ea46e2e2816f9a3447d2.jpg" alt="Profile" className="w-full h-full object-cover" style={{ objectPosition: '100% 100%' }} />
               </div>
               <div className="flex-1 space-y-5 md:pt-1">
                 <span className="inline-block text-sm font-mono tracking-widest font-bold uppercase pl-2.5"
