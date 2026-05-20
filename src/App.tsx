@@ -22,6 +22,7 @@ export default function App() {
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [showExplore, setShowExplore] = useState(false);
   const [showFooterExplore, setShowFooterExplore] = useState(false);
+  const [faqOpen, setFaqOpen] = useState<number | null>(null);
 
   const handleLangSelect = (language: Language) => {
     setLang(language);
@@ -35,6 +36,24 @@ export default function App() {
   };
 
   const t = TRANSLATIONS[lang];
+
+  const faqTitle =
+    lang === 'ZH' ? '常见问题解答' :
+    lang === 'EN' ? 'Frequently asked questions' :
+                   'Häufig gestellte Fragen';
+
+  const faqItems =
+    lang === 'ZH' ? [
+      { q: '你认为自己最大的优点和缺点是什么？', a: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
+      { q: '你目前未来 3-5 年的职业规划是什么？', a: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
+    ] :
+    lang === 'EN' ? [
+      { q: 'What do you consider your greatest strengths and weaknesses?', a: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
+      { q: 'What are your career plans for the next 3–5 years?', a: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
+    ] : [
+      { q: 'Was sind Ihrer Meinung nach Ihre größten Stärken und Schwächen?', a: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
+      { q: 'Was sind Ihre beruflichen Pläne für die nächsten 3–5 Jahre?', a: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
+    ];
 
   const exploreLabel = lang === 'ZH' ? '探索更多' : lang === 'EN' ? 'Explore More' : 'Mehr entdecken';
   const exploreItems =
@@ -334,6 +353,45 @@ export default function App() {
                   </a>
                 </div>
               </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ ─────────────────────────────────────────────── */}
+      <section id="faq" className="py-20" style={{ backgroundColor: '#000000' }}>
+        <div className="max-w-[1100px] mx-auto px-6 sm:px-10">
+          <div className="flex flex-col md:flex-row md:gap-16 md:items-start">
+
+            {/* Left: title */}
+            <div className="md:w-2/5 mb-10 md:mb-0 md:pt-5">
+              <h2 className="text-xl md:text-2xl lg:text-3xl font-light text-white leading-tight tracking-tight">
+                {faqTitle}
+              </h2>
+            </div>
+
+            {/* Right: accordion */}
+            <div className="md:w-3/5" style={{ borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+              {faqItems.map((item, idx) => (
+                <div key={idx} style={{ borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
+                  <button
+                    className="w-full flex items-center justify-between py-5 text-left cursor-pointer"
+                    onClick={() => setFaqOpen(faqOpen === idx ? null : idx)}
+                  >
+                    <span className="text-sm font-medium text-white pr-6 leading-snug">{item.q}</span>
+                    <span
+                      className="text-white text-2xl font-light flex-shrink-0"
+                      style={{ display: 'inline-block', transform: faqOpen === idx ? 'rotate(45deg)' : 'rotate(0deg)', transition: 'transform 0.3s ease' }}
+                    >+</span>
+                  </button>
+                  <div
+                    style={{ maxHeight: faqOpen === idx ? '200px' : '0px', opacity: faqOpen === idx ? 1 : 0, overflow: 'hidden', transition: 'max-height 0.35s ease, opacity 0.3s ease' }}
+                  >
+                    <p className="text-sm leading-relaxed pb-6" style={{ color: 'rgba(255,255,255,0.45)' }}>{item.a}</p>
+                  </div>
+                </div>
+              ))}
             </div>
 
           </div>
