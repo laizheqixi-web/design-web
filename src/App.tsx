@@ -201,10 +201,10 @@ export default function App() {
       ══════════════════════════════════════════════════════ */}
       <section id="home" className="pt-32 pb-10" style={{ backgroundColor: C.darkBg }}>
         <div className="max-w-[1100px] mx-auto px-6 sm:px-10">
-          <div className="rounded-xl p-8 md:p-12" style={{ backgroundColor: C.darkBg }}>
+          <div className="rounded-xl p-5 md:p-12" style={{ backgroundColor: C.darkBg }}>
 
             {/* Status bar */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-8 mb-10 text-[10px] font-mono"
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-5 mb-6 md:pb-8 md:mb-10 text-[10px] font-mono"
               style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', color: 'rgba(255,255,255,0.3)' }}>
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
@@ -218,7 +218,7 @@ export default function App() {
 
             {/* Content */}
             <div className="flex flex-col md:flex-row items-center gap-10 md:gap-14">
-              <div className="flex-shrink-0 w-40 h-40 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
+              <div className="flex-shrink-0 w-24 h-24 md:w-48 md:h-48 lg:w-56 lg:h-56 rounded-full overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.08)' }}>
                 <img src="/b8afd71a6e77ea46e2e2816f9a3447d2.jpg" alt="Profile" className="w-full h-full object-cover" style={{ objectPosition: '100% 100%' }} />
               </div>
               <div className="flex-1 space-y-5 md:pt-1">
@@ -245,9 +245,9 @@ export default function App() {
       ══════════════════════════════════════════════════════ */}
       <section id="work" className="py-10" style={{ backgroundColor: C.warmBg }}>
         <div className="max-w-[1100px] mx-auto px-6 sm:px-10">
-          <div className="rounded-xl p-8 md:p-12" style={{ backgroundColor: C.offWhite, border: `1px solid ${C.border}` }}>
+          <div className="rounded-xl p-5 md:p-12" style={{ backgroundColor: C.offWhite, border: `1px solid ${C.border}` }}>
 
-            <div className="mb-10 space-y-2">
+            <div className="mb-6 md:mb-10 space-y-2">
               <span className="text-[10px] font-mono tracking-wider uppercase" style={{ color: C.textFaint }}>01 / Experience</span>
               <h2 className="font-sans text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: C.darkBg }}>{t.work.sectionTitle}</h2>
               <p className="text-sm font-light leading-relaxed max-w-xl" style={{ color: C.textMed }}>{t.work.sectionSubtitle}</p>
@@ -255,7 +255,7 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {t.work.projects.map((proj) => (
-                <div key={proj.id} className="flex flex-col rounded-xl p-6 min-h-[300px] bg-white" style={{ border: `1px solid ${C.border}` }}>
+                <div key={proj.id} className="flex flex-col rounded-xl p-5 md:p-6 md:min-h-[300px] bg-white" style={{ border: `1px solid ${C.border}` }}>
                   <div className="flex items-start justify-between mb-4">
                     <span className="text-[9px] font-mono uppercase tracking-widest" style={{ color: C.textFaint }}>{proj.category}</span>
                     <span className="text-[9px] font-mono flex-shrink-0 ml-2" style={{ color: C.textFaint }}>{proj.year}</span>
@@ -291,9 +291,9 @@ export default function App() {
       ══════════════════════════════════════════════════════ */}
       <section id="why-me" className="py-10" style={{ backgroundColor: C.darkBg }}>
         <div className="max-w-[1100px] mx-auto px-6 sm:px-10">
-          <div className="rounded-xl p-8 md:p-12" style={{ backgroundColor: C.darkBg, border: '1px solid rgba(255,255,255,0.08)' }}>
+          <div className="rounded-xl p-5 md:p-12" style={{ backgroundColor: C.darkBg, border: '1px solid rgba(255,255,255,0.08)' }}>
 
-            <div className="mb-10 space-y-2">
+            <div className="mb-6 md:mb-10 space-y-2">
               <span className="text-[10px] font-mono tracking-wider uppercase" style={{ color: 'rgba(255,255,255,0.3)' }}>02 / Value System</span>
               <h2 className="font-sans text-2xl md:text-3xl font-bold tracking-tight text-white uppercase">{t.whyMe.sectionTitle}</h2>
               <p className="text-sm font-light leading-relaxed max-w-xl" style={{ color: 'rgba(255,255,255,0.5)' }}>{t.whyMe.sectionSubtitle}</p>
@@ -301,7 +301,7 @@ export default function App() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {t.whyMe.items.map((item) => (
-                <div key={item.id} className="rounded-xl p-6" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                <div key={item.id} className="rounded-xl p-4 md:p-6" style={{ backgroundColor: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.08)' }}>
                   <div className="text-[9px] font-mono uppercase tracking-widest mb-3" style={{ color: 'rgba(255,255,255,0.25)' }}>{item.num}</div>
                   <h4 className="text-sm font-semibold text-white mb-3">{item.title}</h4>
                   <p className="text-xs leading-relaxed font-light" style={{ color: 'rgba(255,255,255,0.5)' }}>{item.description}</p>
@@ -323,9 +323,9 @@ export default function App() {
       ══════════════════════════════════════════════════════ */}
       <section id="contact" className="py-10" style={{ backgroundColor: C.warmBg }}>
         <div className="max-w-[1100px] mx-auto px-6 sm:px-10">
-          <div className="bg-white rounded-xl p-8 md:p-12" style={{ border: `1px solid ${C.border}` }}>
+          <div className="bg-white rounded-xl p-5 md:p-12" style={{ border: `1px solid ${C.border}` }}>
 
-            <div className="mb-8 space-y-2">
+            <div className="mb-6 md:mb-8 space-y-2">
               <span className="text-[10px] font-mono tracking-wider uppercase" style={{ color: C.textFaint }}>03 / Contact</span>
               <h2 className="text-2xl md:text-3xl font-bold tracking-tight uppercase" style={{ color: C.darkBg }}>{t.contact.sectionTitle}</h2>
               <p className="text-sm font-light leading-relaxed max-w-xl" style={{ color: C.textMed }}>{t.contact.sectionSubtitle}</p>
@@ -360,7 +360,7 @@ export default function App() {
       </section>
 
       {/* ── FAQ ─────────────────────────────────────────────── */}
-      <section id="faq" className="py-20" style={{ backgroundColor: '#000000' }}>
+      <section id="faq" className="py-12 md:py-20" style={{ backgroundColor: '#000000' }}>
         <div className="max-w-[1100px] mx-auto px-6 sm:px-10">
           <div className="flex flex-col md:flex-row md:gap-16 md:items-start">
 
@@ -405,7 +405,7 @@ export default function App() {
             <span className="text-xs font-mono font-bold text-white uppercase tracking-widest">L. ZHEXIAN</span>
             <p className="text-[10px] font-mono" style={{ color: 'rgba(255,255,255,0.2)' }}>&copy; {new Date().getFullYear()} Koblenz, Germany.</p>
           </div>
-          <div className="flex gap-5 text-sm font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.65)' }}>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-mono font-semibold uppercase tracking-wider" style={{ color: 'rgba(255,255,255,0.65)' }}>
             <a href="#home" className="hover:text-white transition-all">{t.nav.home}</a>
             <span style={{ color: 'rgba(255,255,255,0.15)' }}>/</span>
             <a href="#work" className="hover:text-white transition-all">{t.nav.work}</a>
