@@ -23,6 +23,13 @@ export default function App() {
   const [showExplore, setShowExplore] = useState(false);
   const [showFooterExplore, setShowFooterExplore] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
+  const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
+  const toggleProject = (id: string) =>
+    setExpandedProjects(prev => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
 
   const handleLangSelect = (language: Language) => {
     setLang(language);
@@ -261,7 +268,35 @@ export default function App() {
                     <span className="text-[9px] font-mono flex-shrink-0 ml-2" style={{ color: C.textFaint }}>{proj.year}</span>
                   </div>
                   <h3 className="text-sm font-bold mb-3 leading-snug" style={{ color: C.darkBg }}>{proj.title}</h3>
-                  <p className="text-xs leading-relaxed font-light mb-5 flex-1" style={{ color: C.textMed }}>{proj.description}</p>
+                  {/* Description with fade + read-more */}
+                  <div className="mb-5 flex-1">
+                    <div
+                      className="text-xs leading-relaxed font-light overflow-hidden"
+                      style={{
+                        color: C.textMed,
+                        maxHeight: expandedProjects.has(proj.id) ? '600px' : '3.25em',
+                        transition: 'max-height 0.4s ease',
+                        WebkitMaskImage: expandedProjects.has(proj.id)
+                          ? 'none'
+                          : 'linear-gradient(to bottom, black 35%, transparent 100%)',
+                        maskImage: expandedProjects.has(proj.id)
+                          ? 'none'
+                          : 'linear-gradient(to bottom, black 35%, transparent 100%)',
+                      }}
+                    >
+                      {proj.description}
+                    </div>
+                    {!expandedProjects.has(proj.id) && (
+                      <button
+                        onClick={() => toggleProject(proj.id)}
+                        className="flex items-center gap-1 mt-1 cursor-pointer select-none"
+                        style={{ color: C.textMed }}
+                      >
+                        <span className="text-sm leading-none">›</span>
+                        <span className="text-[11px] font-display tracking-wide">阅读更多</span>
+                      </button>
+                    )}
+                  </div>
                   <div className="flex flex-wrap gap-1.5 mb-5">
                     {proj.techStack.map((tech) => (
                       <span key={tech} className="text-[9px] font-mono px-2 py-0.5 rounded-sm"
