@@ -23,6 +23,7 @@ export default function App() {
   const [showExplore, setShowExplore] = useState(false);
   const [showFooterExplore, setShowFooterExplore] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showMobileExplore, setShowMobileExplore] = useState(false);
   const [faqOpen, setFaqOpen] = useState<number | null>(null);
   const [expandedProjects, setExpandedProjects] = useState<Set<string>>(new Set());
   const descRefs = useRef<Record<string, HTMLDivElement | null>>({});
@@ -228,12 +229,32 @@ export default function App() {
             <a href="#work" onClick={() => setShowMobileMenu(false)} className="py-2.5 hover:text-white transition-colors" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>{t.nav.work}</a>
             <a href="#why-me" onClick={() => setShowMobileMenu(false)} className="py-2.5 hover:text-white transition-colors" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>{t.nav.whyMe}</a>
             <a href="#contact" onClick={() => setShowMobileMenu(false)} className="py-2.5 hover:text-white transition-colors" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>{t.nav.contact}</a>
-            <div className="py-2.5" style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
-              <span className="block mb-2">{exploreLabel}</span>
-              <div className="flex flex-col gap-1 pl-3">
-                {exploreItems.map((item) => (
-                  <a key={item} href="#" onClick={() => setShowMobileMenu(false)} className="py-1 text-[11px] hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.3)' }}>{item}</a>
-                ))}
+            <div style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}>
+              <button
+                className="w-full flex items-center justify-between py-2.5 cursor-pointer hover:text-white transition-colors"
+                onClick={() => setShowMobileExplore(v => !v)}
+              >
+                <span>{exploreLabel}</span>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    transition: 'transform 0.3s ease',
+                    transform: showMobileExplore ? 'rotate(-90deg)' : 'rotate(0deg)',
+                  }}
+                >›</span>
+              </button>
+              <div
+                className="overflow-hidden"
+                style={{
+                  maxHeight: showMobileExplore ? '200px' : '0px',
+                  transition: 'max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                }}
+              >
+                <div className="flex flex-col gap-1 pl-3 pb-3">
+                  {exploreItems.map((item) => (
+                    <a key={item} href="#" onClick={() => setShowMobileMenu(false)} className="py-1 text-[11px] hover:text-white transition-colors" style={{ color: 'rgba(255,255,255,0.3)' }}>{item}</a>
+                  ))}
+                </div>
               </div>
             </div>
           </nav>
